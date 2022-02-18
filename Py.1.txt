@@ -1,0 +1,50 @@
+#Task1
+# print("Enter Hours:")
+# hournum=float(input())
+# print("Enter Rate:")
+# ratenum=float(input())
+# print("Pay:", hournum*ratenum)
+
+
+#Task2
+# x=input("Enter number: ")
+# sum=0
+# num=0
+# while x!="done":
+#     if x.isnumeric():
+#         num+=1
+#         sum+=int(x)
+#     else:
+#         print("Invalid input")
+#     x = input("Enter number: ")
+# print("The number is: ", num)
+# print("The sum is: ", sum)
+# if num!=0:
+#     print("The arithmetic mean is: ", sum/num)
+# else:
+#     print("The arithmetic mean is: ", 0)
+
+#Task3
+# x=input()
+# if x=="a" or x=="e" or x=="i" or x=="o" or x=="u":
+#     print("It's vowel")
+# elif x=="y":
+#     print("It's both consonant and vowel")
+# else:
+#     print("It's consonant")
+
+#Task4
+# letter=input("Enter a letter from the range [a,h]: " )
+# number=int(input("Enter a number from the range [1,8]: " ))
+# if (letter=="a" or letter=="c" or letter=="e" or letter=="g") and number%2==0:
+# 	print("White")
+# elif (letter=="a" or letter=="c" or letter=="e" or letter=="g") and number%2==1:
+# 	print("Black")
+# elif (letter=="b" or letter=="d" or letter=="f" or letter=="h") and number%2==0:
+# 	print("Black")
+# else:
+# 	print("White")
+
+#Task5
+# F=int(input("Enter the temperature by Fahrenheit: "))
+# print(("The corresponding temperature by Celsius is:"), (F-32)/1.8)
