@@ -66,7 +66,8 @@ def VariableMaker(lst):
         elif lst[0]=="input" and len(lst)==1:
             identifiers.update({var: input()})
         else:
-            return "It's an invalid syntax for defining variables"
+            print("Invalid syntax for defining variables")
+            return False
 
 def Comp(str):
     count=0
@@ -128,10 +129,10 @@ def Comp(str):
             str=str.replace(identifiers[new_lst[1]], IsArithm(new_lst[0]), 1)
             return Comp(str)
         else:
-            print("Syntax error")
+            print("Illegal expression for comparison")
             return False
     else:
-        print("Syntax error")
+        print("Illegal expression for comparison")
         return False
 
 # def Functions(lst_member):
@@ -185,13 +186,13 @@ cpno=0
 for line in prog:
     lst=Lexer(line)
     length=len(lst)
-    if cpyes==1 and lst[length-1]=="}":
-        cpyes=0
-    elif cpno==1:
-        if lst[length-1]=="}":
-            cpno=0
+    if cpno == 1:
+        if length==1 and lst[0] == "}":
+            cpno = 0
         else:
             continue
+    elif cpyes==1 and length==1 and lst[0]=="}":
+        cpyes=0
     elif length<2:
         print("Syntax error")
         break
