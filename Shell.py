@@ -1,3 +1,17 @@
+#EXAMPLE
+# a=input
+# b=7
+# if a+b>8 {
+# output a*b
+# }
+#
+# input: 8
+# output: 56
+# input: 0
+# output:
+# input: 1
+# output:
+
 import sys
 identifiers={}
 functions={}
@@ -20,7 +34,9 @@ def DataTypes(str):
         return "int"
     elif str.startswith("-") and str[1]!=0 and str.replace("-","1",1).isnumeric():
         return "int"
-    elif str.count(".")==1 and str.replace(".","1").isnumeric():
+    elif str.replace(".","1",1).isnumeric():
+        return "float"
+    elif str.startswith("-") and str.replace(".","1",1).replace("-","1",1).isnumeric():
         return "float"
     elif str.startswith("'") and str.endswith("'"):
         return "str"
@@ -42,7 +58,7 @@ def VariableMaker(lst):
             identifiers.update({var: IsArithm(lst[0])})
         elif lst[0] in identifiers and len(lst)==1:
             identifiers.update({var: identifiers[lst[0]]})
-        elif DataTypes(lst[0]) in data_types and len(lst)==1:
+        elif DataTypes(lst[0]) and len(lst)==1:
             identifiers.update({var: lst[0]})
         elif lst[0] in functions:
             if functions[lst[0]]!="None":
@@ -51,6 +67,7 @@ def VariableMaker(lst):
             identifiers.update({var: input()})
         else:
             return "It's an invalid syntax for defining variables"
+
 def Comp(str):
     count=0
     op=0
@@ -132,15 +149,19 @@ def IsArithm(lst):
         return False
 
 def Give(line):
-    if len(line) == 2 and line[0] == "give" and line[1] in identifiers:
+    if line[1] in identifiers:
         return identifiers[line[1]]
-    elif len(line) == 2 and line[0] == "give" and DataTypes(line[1]):
+    elif DataTypes(line[1]):
         return line[1]
+    elif IsArithm(line[1]):
+        return IsArithm(line[1])
+    else:
+        return False
 
 def Output(line):
     if line[1] in identifiers:
         print(identifiers[line[1]])
-    elif line[1] in functions and functions[lst[1]] != "None":
+    elif line[1] in functions and functions[line[1]] != "None":
         print(functions[line[1]])
     elif DataTypes(line[1]):
         print(line[1])
@@ -166,19 +187,20 @@ for line in prog:
     length=len(lst)
     if cpyes==1 and lst[length-1]=="}":
         cpyes=0
-    if cpno==1:
+    elif cpno==1:
         if lst[length-1]=="}":
             cpno=0
         else:
             continue
     elif length<2:
-        print("The length is less than 2")
+        print("Syntax error")
+        break
     elif length>1:
         if lst[0]=="output":
             Output(lst)
         if Variables(lst[0]) and lst[1]=="=":
             VariableMaker(lst)
-        elif lst[0]=="give":
+        elif lst[0]=="give" and len(lst)==2:
             Give(lst)
         elif lst[0]=="if" and lst[length-1]=="{" and length>2:
             if Comp(lst[1]):
@@ -186,4 +208,3 @@ for line in prog:
                 continue
             else:
                 cpno+=1
-
